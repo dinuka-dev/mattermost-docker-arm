@@ -11,6 +11,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
     env_file:
       - run.env
+
   app:
     image: rheens/mattermost-app:v9.8.1
     build:
@@ -20,6 +21,8 @@ services:
         - GOOS=linux
         - GOARCH=arm64
     restart: unless-stopped
+    ports:
+      - "8065:8065"
     volumes:
       - ./volumes/app/mattermost/config:/mattermost/config:rw
       - ./volumes/app/mattermost/data:/mattermost/data:rw
